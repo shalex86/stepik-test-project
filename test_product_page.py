@@ -6,4 +6,5 @@ def test_guest_can_add_product_to_basket(browser):
     page = ProductPage(browser, link)
     page.open()
     page.go_to_add_to_basket()
-    page.should_be_price()
+    time.sleep(5)
+    page.compare_values_book_price()
