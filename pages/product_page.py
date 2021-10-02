@@ -5,7 +5,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 class ProductPage(BasePage):
     def go_to_add_to_basket(self, promo=False):
-        login_link = self.browser.find_element(*ProductPageLocators.BASKET_LINK)
+        login_link = self.browser.find_element(*ProductPageLocators.BASKET_ADD_LINK)
         login_link.click()
         if promo:
             self.solve_quiz_and_get_code()
