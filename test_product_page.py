@@ -8,6 +8,7 @@ def custom_format_link_string(param):
     link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer{}"
     return link.format(param)
 
+@pytest.mark.need_review
 @pytest.mark.parametrize('link', 
     [
         custom_format_link_string(x) if x != 7 else pytest.param(custom_format_link_string(x),
@@ -47,6 +48,7 @@ def test_guest_should_see_login_link_on_product_page(browser):
     page.open()
     page.should_be_login_link()
 
+@pytest.mark.need_review
 def test_guest_can_go_to_login_page_from_product_page(browser):
     link = "http://selenium1py.pythonanywhere.com/en-gb/catalogue/the-city-and-the-stars_95/"
     page = ProductPage(browser, link)
@@ -54,7 +56,8 @@ def test_guest_can_go_to_login_page_from_product_page(browser):
     page.should_be_login_link()
     page.go_to_login_page()
 
-def test_guest_cant_see_product_in_basket_opened_from_main_page(browser):
+@pytest.mark.need_review
+def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
     link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207"
     page = ProductPage(browser, link)
     page.open()
@@ -63,7 +66,6 @@ def test_guest_cant_see_product_in_basket_opened_from_main_page(browser):
     basket_page.is_basket_empty()
     basket_page.is_present_text_basket_empty()
 
-@pytest.mark.new
 class TestUserAddToBasketFromProductPage():
     @pytest.fixture(scope="function", autouse=True)
     def setup(self, browser):
@@ -78,6 +80,7 @@ class TestUserAddToBasketFromProductPage():
         login_page.register_new_user(email, passw)
         login_page.is_user_registered()
 
+    @pytest.mark.need_review
     def test_user_can_add_product_to_basket(self, browser):
         link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207"
         page = ProductPage(browser, link)
